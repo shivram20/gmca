@@ -1,0 +1,196 @@
+
+table{
+    width: 100%;
+    margin-top: 10px;
+    font-size: 1rem;
+}
+
+.full-header {
+    width: 100%;
+    background: orange;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    flex-wrap: wrap;
+}
+
+/* 🖼 LEFT SIDE (3 student images) */
+.left-logos {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.left-logos .img-box {
+    text-align: center;
+}
+
+.left-logos img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 6px;
+    /* border: 2px solid #000; */
+}
+
+.left-logos b {
+    display: block;
+    margin-top: 3px;
+    font-size: 14px;
+}
+
+/* 🎯 CENTER TITLE + MENU */
+.center-header {
+    text-align: center;
+    flex: 1;
+}
+
+.center-header h1 {
+    margin-bottom: 10px;
+    font-size: 1.8rem;
+}
+
+.center-header nav a {
+    text-decoration: none;
+    font-size: 1rem;
+    color: black;
+    padding: 5px 10px;
+}
+
+/* 🏫 RIGHT: College Logo */
+.right-logo img {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    border-radius: 10px;
+    /* border: 2px solid black; */
+}
+
+/* 📱 MOBILE RESPONSIVE */
+@media (max-width: 768px) {
+    .center-header h1 {
+        font-size: 1.4rem;
+    }
+    .right-logo img {
+        width: 70px;
+        height: 70px;
+    }
+}
+
+@media (max-width: 480px) {
+    .full-header {
+        text-align: center;
+        flex-direction: column;
+    }
+
+    .left-logos {
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+
+    .center-header nav a {
+        display: block;
+        margin: 5px 0;
+        font-size: 1.1rem;
+    }
+
+    .right-logo {
+        margin-top: 10px;
+    }
+}
+#top{
+    height: 10vh;
+}
+#center{
+    height: 60vh;
+}
+#bottom{
+    height: 20vh;
+}
+/* ================================
+   🔶 MAIN CONTENT 3 COLUMN ROW
+================================= */
+tr {
+  width: 100%;
+}
+
+tr td {
+  padding: 20px;
+  vertical-align: top;
+}
+
+/* Section titles */
+tr td span {
+  font-size: 1.3rem;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 10px;
+}
+
+/* Links section */
+td a {
+  text-decoration: none;
+  color: blue;
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+}
+
+/* ============== RESPONSIVE ============== */
+
+/* Tablet View */
+@media (max-width: 768px) {
+  tr td {
+    width: 100% !important;
+    display: block;
+  }
+
+  tr td span {
+    text-align: center;
+  }
+}
+
+/* Mobile View */
+@media (max-width: 480px) {
+  tr td {
+    padding: 10px;
+  }
+
+  tr td span {
+    font-size: 1.2rem;
+  }
+
+  td a {
+    font-size: 1rem;
+  }
+}
+
+tr[bgcolor="orange"] td {
+  text-align: center;
+  padding: 25px 10px;
+  font-size: 1rem;
+}
+
+tr[bgcolor="orange"] p {
+  margin: 5px 0;
+}
+
+tr[bgcolor="orange"] a {
+  font-weight: bold;
+  color: darkblue;
+  text-decoration: none;
+}
+
+/* Horizontal line centered & responsive */
+tr[bgcolor="orange"] hr {
+  margin: 10px auto;
+}
+
+/* ============== RESPONSIVE FOOTER ============== */
+
+@media (max-width: 480px) {
+  tr[bgcolor="orange"] td {
+    font-size: 0.9rem;
+    padding: 15px;
+  }
+}
