@@ -10,15 +10,15 @@
         <td>
           <div class="left-logos">
             <div class="img-box">
-              <img src="./images/mig.jpeg" alt="Student 1" />
+              <img src="images/mig.jpeg" alt="Student 1" />
               <b>255690694070</b>
             </div>
             <div class="img-box">
-              <img src="./images/img1.jpeg" alt="Student 2" />
+              <img src="images/img1.jpeg" alt="Student 2" />
               <b>255690694009</b>
             </div>
             <div class="img-box">
-              <img src="./images/mig.jpeg" alt="Student 3" />
+              <img src="images\img2.jpeg" alt="Student 3" />
               <b>255690694028</b>
             </div>
           </div>
@@ -32,12 +32,13 @@
                 session_start();
 
               if (isset($_SESSION['enabled']) && $_SESSION['enabled'] === true) {
-                echo "<a href='./About.php'>About</a>|";
-                echo "<a href='./MyCalculator.php'>Calculator</a> | ";
+                echo "<a href='./Pages/About.php'>About</a>|";
+                echo "<a href='./Pages/Reservation.php'>Reservation</a>|";
+                echo "<a href='./Pages/MyCalculator.php'>Calculator</a> | ";
                 echo "<a href='./logout.php'>Logout</a>";
               } else {
-                echo "<a href='./login_page.php'>Login</a> | ";
-                echo "<a href='./Registration.php'>Register</a>";
+                echo "<a href='./Pages/login_page.php'>Login</a> | ";
+                echo "<a href='./Pages/Registration.php'>Register</a>";
               }
             ?>
 

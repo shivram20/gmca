@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculator using java</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
     <div class="container">
@@ -27,6 +27,6 @@
                 <button onclick="appendNumber('2')">2</button>
                 <button onclick="appendNumber('3')">3</button>
                 <button onclick="calculate()">=</button>
-    <script src="script.js"></script>
+    <script src="../script/script.js"></script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-<?php include("connection.php"); ?>
+<?php include("../connection.php"); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./style_login.css" />
+    <link rel="stylesheet" href="../css/style_login.css" />
 </head>
 <body>
     <form action="" method="post">
@@ -34,17 +34,18 @@
         $q = "SELECT * FROM `users` WHERE `user_email` = '$email'";
         $result = mysqli_query($conn, $q);
         $row = mysqli_fetch_assoc($result);
+        
     
         if(mysqli_num_rows($result) > 0){
             if(password_verify($password, $row['user_password'])){
                 $_SESSION['email'] = $email;
                 $_SESSION['enabled'] = true;
-                header("Location: index.php");
+                header("Location: ../index.php");
                 exit();
             }
         } else {
             $_SESSION['enabled'] = false;
-            header("Location: login_page.php?error=1");
+            echo"<script>alert('Invalid Email or Password!');</script>";
             exit();
         }
     }
