@@ -1,0 +1,72 @@
+
+/* Container styling */
+.containerdata {
+    width: 90%;
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    font-family: Arial, sans-serif;
+}
+
+.containerdata h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 16px;
+}
+
+table th, table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: #2c3e50;
+    color: white;
+    font-weight: bold;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table tr:hover {
+    background-color: #f1f1f1;
+    transition: 0.2s ease-in-out;
+}
+
+/* Action links styling */
+table td a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 6px 10px;
+    border-radius: 5px;
+}
+
+table td a:hover {
+    background-color: #007bff;
+    color: white;
+    transition: 0.3s;
+}
+
+table td a:nth-child(2) {
+    color: #d9534f;
+}
+
+table td a:nth-child(2):hover {
+    background-color: #d9534f;
+    color: white;
+}

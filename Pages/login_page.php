@@ -1,4 +1,4 @@
-<?php include("../connection.php"); ?>
+<!-- <?php include("../connection.php"); ?> -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -45,9 +45,15 @@
             }
         } else {
             $_SESSION['enabled'] = false;
-            echo"<script>alert('Invalid Email or Password!');</script>";
+            echo "
+                <script>
+                    alert('Invalid Email or Password!');
+                    window.location.href = 'login_page.php'; // redirect page
+                </script>
+            ";
             exit();
-        }
+}
+
     }
 ?>
 

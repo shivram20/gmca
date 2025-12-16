@@ -53,23 +53,24 @@ if(isset($_POST['submit'])){
             <label>Number Of Guests</label>
             <input type="number" id="guests" value="<?php echo $row['guest']; ?>" name="guests" min="1" max="5" />
           </div>
-          <div>
-            <label>Room Type</label>
-            <select id="roomtype" name="roomtype">
+         <div>
+          <label>Room Type</label>
+          <select id="roomtype" name="roomtype" required> 
               <option value="">--Select--</option>
-              <option value="single">Single</option>
-              <option value="double">Double</option>
-              <option value="suite">Suite</option>
-            </select>
-          </div>
+              <option value="single" >Single</option>
+              <option value="double" >Double</option>
+              <option value="suite" >Suite</option>
+          </select>
+        </div>
           <div>
             <label>Special Requests</label>
             <textarea
               id="requests"
               name="requests"
               value = "<?php echo $row['special_req']; ?>"
+              placeholder="Enter any special requests"
               rows="3"
-              placeholder="Any special requirements?"
+              required
             ></textarea>
           </div>
         </div>
@@ -80,6 +81,6 @@ if(isset($_POST['submit'])){
         </div>
       </form>
     </div>
-
+    <script src="../script/reservationscript.js"></script>
 </body>
 </html>

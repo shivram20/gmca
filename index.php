@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" ng-app="myApp">
   <head>
     <title>Simple Web Page Using Table tag</title>
-    <link rel="stylesheet" href="stylehome.css" />
+    <link rel="stylesheet" href="./css/stylehome.css" />
+      <title>AngularJS SPA</title>
   </head>
   <body>
     <table width="100%" cellspacing="5" cellpadding="10">
@@ -27,7 +28,7 @@
           <div class="center-header">
             <h1>Web Technology Project Practical</h1>
             <nav>
-              <a href="./index.php">Home</a>|
+              <a href="./index.php">Home</a>| 
              <?php 
                 session_start();
 
@@ -45,14 +46,14 @@
             </nav>
           </div>
         </td>
-
+        
+        <div ng-view></div>
         <td>
           <div class="right-logo">
             <img src="./images/logo_gmca.jpg" alt="College Logo" />
           </div>
         </td>
       </tr>
-
       <tr id="center">
         <td width="33%">
           <span>Latest News</span>
@@ -86,8 +87,7 @@
             Government MCA College, K. K. Shastri Education Campus, Maninagar
             (East), Ahmedabad - 380008, INDIA
           </p>
-        </td>
-
+        </td>    
         <td width="33%">
           <span>Important Links</span><br /><br />
           <a href="https://gmca.ac.in/mandatory?sub=AICTE">AICTE</a><br />

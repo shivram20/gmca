@@ -9,12 +9,89 @@ $email = $_SESSION['email'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotel Reservation form</title>
     <link rel="stylesheet" href="../css/reservationform.css">
+     <!-- <link rel="stylesheet" href="../css/table.css"> -->
+    <style>
+      /* Container styling */
+      .containerdata {
+          width: 80%;
+          max-width: 1000px;
+          margin: 40px auto;
+          padding: 20px;
+          background: #ffffff;
+          border-radius: 10px;
+          box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+          font-family: Arial, sans-serif;
+          margin-bottom: 20px;
+      }
+
+      .containerdata h2 {
+          text-align: center;
+          margin-bottom: 20px;
+          color: #333;
+          font-size: 28px;
+          font-weight: bold;
+      }
+
+      /* Table styling */
+      table {
+          width: 90%;
+          border-collapse: collapse;
+          text-align: left;
+          font-size: 16px;
+          margin-left: 5%;
+      }
+
+      table th, table td {
+          padding: 12px 15px;
+          border-bottom: 1px solid #ddd;
+      }
+
+      table th {
+          background-color: #2c3e50;
+          color: white;
+          font-weight: bold;
+      }
+
+      table tr:nth-child(even) {
+          background-color: #f9f9f9;
+      }
+
+      table tr:hover {
+          background-color: #f1f1f1;
+          transition: 0.2s ease-in-out;
+      }
+
+      /* Action links styling */
+      table td a {
+          color: #007bff;
+          text-decoration: none;
+          font-weight: bold;
+          padding: 6px 10px;
+          border-radius: 5px;
+      }
+
+      table td a:hover {
+          background-color: #007bff;
+          color: white;
+          transition: 0.3s;
+      }
+
+      table td a:nth-child(2) {
+          color: #d9534f;
+      }
+
+      table td a:nth-child(2):hover {
+          background-color: #d9534f;
+          color: white;
+      }
+
+    </style>
 </head>
 <body>
      <div class="container">
       <form action="" method="post" class="box" id="reservationForm">
       <div class="right">
-          <h3>Reservation Details</h3>
+          <h2>Reservation Details</h2>
           <div>
             <label>Check-in Date</label>
             <input type="date" id="checkin" name="checkin" />
@@ -59,7 +136,7 @@ $email = $_SESSION['email'];
     <?php 
     $query = "SELECT * FROM `reservations` WHERE `email` = '$email'";
     $result = mysqli_query($conn, $query);
-
+    // $row = mysqli_fetch_assoc($result);
     ?>
 
     <div class="containerdata">
@@ -96,6 +173,7 @@ $email = $_SESSION['email'];
 </html>
 
 <?php 
+  error_reporting(0);
   if(isset($_POST['submit'])){
     $checkin = $_POST['checkin'];
     $checkout = $_POST['checkout'];
@@ -117,21 +195,20 @@ $email = $_SESSION['email'];
         $query = "INSERT INTO `reservations`(`c_in_date`, `c_out_date`, `guest`, `room_type`, `special_req`, `email`)
         VALUES ('$checkin','$checkout','$guests','$roomtype','$requests','$email')";
         $result = mysqli_query($conn, $query);
-
-        if($result){
-          echo "
-          <script>
-          alert('Reservation successful');
-          </script>
-          ";
-          header("Location: reservation.php");
-        }else{
-          echo "
-          <script>
-          alert('Reservation failed');
-          </script>
-          ";
-          header("Location: reservation.php");
+        if ($result) {
+            echo "
+                <script>
+                    alert('Reservation successful');
+                    window.location.href = 'Reservation.php';
+                </script>
+            ";
+        } else {
+            echo "
+                <script>
+                    alert('Reservation failed');
+                    window.location.href = 'Reservation.php';
+                </script>
+            ";
         }
       }
 
