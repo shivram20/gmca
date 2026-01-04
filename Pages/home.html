@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /* Home Section Container */
+      .home-container {
+        display: flex;
+        gap: 20px;
+        padding: 20px;
+        flex-wrap: wrap;
+        background: #f5f7fa;
+      }
+
+      /* Card Design */
+      .home-card {
+        flex: 1;
+        min-width: 280px;
+        background: white;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      /* Hover Effect */
+      .home-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      /* Headings */
+      .home-card h2 {
+        color: #ff7a00;
+        margin-bottom: 15px;
+        font-size: 22px;
+        border-bottom: 2px solid #ff7a00;
+        padding-bottom: 5px;
+      }
+
+      /* Text */
+      .home-card p,
+      .home-card li {
+        font-size: 15px;
+        line-height: 1.6;
+        color: #333;
+      }
+
+      /* List */
+      .home-card ul {
+        padding-left: 18px;
+      }
+
+      /* Links */
+      .home-card a {
+        display: block;
+        margin: 8px 0;
+        text-decoration: none;
+        color: #007bff;
+        font-weight: bold;
+      }
+
+      .home-card a:hover {
+        color: #ff7a00;
+        text-decoration: underline;
+      }
+
+      /* Mobile Responsive */
+      @media (max-width: 768px) {
+        .home-container {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <table>
+      <tr id="center">
+        <td colspan="3">
+          <div class="home-container">
+            <!-- Latest News -->
+            <div class="home-card">
+              <h2>Latest News</h2>
+              <ul>
+                <li>
+                  Government MCA College is one of the best colleges in the
+                  city.
+                </li>
+                <li>
+                  Total 60 student seats are available (CMAT exam is mandatory).
+                </li>
+                <li>Last year MCA students got excellent job placements.</li>
+              </ul>
+            </div>
+
+            <!-- About Institute -->
+            <div class="home-card">
+              <h2>About Our Institute</h2>
+              <p>
+                Government MCA College Maninagar, Ahmedabad is the first
+                Government MCA College in Gujarat. It was established in June
+                2012.
+              </p>
+              <p>
+                The vision of the college is to provide value-based quality
+                education to enable students to achieve their potential.
+              </p>
+              <p>
+                K. K. Shastri Education Campus, Maninagar (East), Ahmedabad -
+                380008, INDIA
+              </p>
+            </div>
+
+            <!-- Important Links -->
+            <div class="home-card">
+              <h2>Important Links</h2>
+              <a href="https://gmca.ac.in/mandatory?sub=AICTE" target="_blank"
+                >AICTE</a
+              >
+              <a href="https://acpc.gujarat.gov.in/" target="_blank">ACPC</a> 
+              <a href="https://cmat.nta.nic.in/" target="_blank">CMAT</a>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
