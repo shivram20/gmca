@@ -58,6 +58,10 @@ app.config(function ($routeProvider) {
       resolve: { auth: authResolve },
     })
 
+    // .when("/History_Reservation",{
+    //   templateUrl:"Pages/demo.php"
+    // })
+
     .otherwise({ redirectTo: "/" });
 });
 

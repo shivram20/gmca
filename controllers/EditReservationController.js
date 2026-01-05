@@ -45,6 +45,7 @@ angular
           })
           .then(function (res) {
             if (res.data.status === "success") {
+              $location.path("/");
               alert("Updated successfully");
             } else {
               alert(res.data.message);
