@@ -125,7 +125,7 @@ app.controller("RegisterController", function ($scope, $http, $window) {
       }
 
     }, function () {
-      alert("All fields are required.");
+      alert("❌ Server error.");
     });
 
   };

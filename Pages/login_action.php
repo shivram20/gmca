@@ -3,12 +3,25 @@ session_start();
 header("Content-Type: application/json; charset=UTF-8");
 include("../connection.php");
 
-$data = json_decode(file_get_contents("php://input"), true);
+/* Read JSON input */
+$rawData = file_get_contents("php://input");
+$data = json_decode($rawData, true);
 
-$email = trim($data['email'] ?? '');
+// /* Validate JSON */
+// if (!$data) {
+//     echo json_encode([
+//         "status" => "error",
+//         "message" => "Invalid JSON data"
+//     ]);
+//     exit;
+// }
+
+/* Get & sanitize input */
+$email    = trim($data['email'] ?? '');
 $password = $data['password'] ?? '';
 
-if (empty($email) || empty($password)) {
+/* Empty check */
+if ($email === '' || $password === '') {
     echo json_encode([
         "status" => "error",
         "message" => "Email and password are required"
@@ -16,29 +29,47 @@ if (empty($email) || empty($password)) {
     exit;
 }
 
+/* ✅ Email format validation (same as register) */
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    echo json_encode([
+        "status" => "error",
+        "message" => "Invalid email format"
+    ]);
+    exit;
+}
+
+/* Prepare query */
 $stmt = $conn->prepare(
-    "SELECT user_id, user_password FROM users WHERE user_email = ?"
+    "SELECT user_id, user_password FROM users WHERE user_email = ? LIMIT 1"
 );
 $stmt->bind_param("s", $email);
 $stmt->execute();
 $result = $stmt->get_result();
 
-if ($result->num_rows === 1) {
+/* Check user */
+if ($result && $result->num_rows === 1) {
     $row = $result->fetch_assoc();
 
+    /* Verify password */
     if (password_verify($password, $row['user_password'])) {
 
-        $_SESSION['user_id'] = $row['user_id'];
+        /* Secure session handling */
+        session_regenerate_id(true);
+
+        $_SESSION['user_id']    = $row['user_id'];
         $_SESSION['user_email'] = $email;
+        $_SESSION['logged_in']  = true;
 
         echo json_encode([
-            "status" => "success"
+            "status"  => "success",
+            "message" => "Login successful"
         ]);
+
         exit;
     }
 }
 
-// ❌ Login failed
+/* ❌ Login failed */
 echo json_encode([
     "status" => "error",
     "message" => "Invalid email or password"

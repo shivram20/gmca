@@ -1,19 +1,27 @@
 <?php
-header("Content-Type: application/json");
+header("Content-Type: application/json; charset=UTF-8");
 include("../connection.php");
 
-// Read raw input
+/* Read JSON input */
 $rawData = file_get_contents("php://input");
 $data = json_decode($rawData, true);
 
-// Get data
-$fullname = $data["fullname"];
-$email = $data["email"];
-$password = $data["password"];
-$phone = $data["phone"];
+/* Check valid JSON */
+// if (!$data) {
+//     echo json_encode([
+//         "status" => "error",
+//         "message" => ""
+//     ]);
+//     exit;
+// }
 
+$fullname  = trim($data["fullname"] ?? "");
+$email     = trim($data["email"] ?? "");
+$password  = $data["password"] ?? "";
+$cpassword = $data["cpassword"] ?? "";
+$phone     = trim($data["phone"] ?? "");
 
-if(empty($fullname) || empty($email) || empty($password) || empty($phone)){
+if ($fullname === "" || $email === "" || $password === "" || $phone === "") {
     echo json_encode([
         "status" => "error",
         "message" => "All fields are required"
@@ -21,15 +29,16 @@ if(empty($fullname) || empty($email) || empty($password) || empty($phone)){
     exit;
 }
 
-if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     echo json_encode([
         "status" => "error",
-        "message" => "Invalid email address"
+        "message" => "Invalid email format"
     ]);
     exit;
 }
 
-if($password != $data["cpassword"]){
+/* Password match */
+if ($password !== $cpassword) {
     echo json_encode([
         "status" => "error",
         "message" => "Passwords do not match"
@@ -37,7 +46,17 @@ if($password != $data["cpassword"]){
     exit;
 }
 
-if($phone < 1000000000 || $phone > 9999999999){
+/* Password strength (optional but recommended) */
+if (strlen($password) < 6) {
+    echo json_encode([
+        "status" => "error",
+        "message" => "Password must be at least 6 characters"
+    ]);
+    exit;
+}
+
+/* ✅ Phone validation (India – 10 digits) */
+if (!preg_match("/^[6-9][0-9]{9}$/", $phone)) {
     echo json_encode([
         "status" => "error",
         "message" => "Invalid phone number"
@@ -45,35 +64,47 @@ if($phone < 1000000000 || $phone > 9999999999){
     exit;
 }
 
-// Email exists check
-$check = mysqli_query($conn, "SELECT user_id FROM users WHERE user_email='$email'");
-if (mysqli_num_rows($check) > 0) {
+/* Check email exists */
+$stmt = $conn->prepare("SELECT user_id FROM users WHERE user_email = ?");
+$stmt->bind_param("s", $email);
+$stmt->execute();
+$stmt->store_result();
+
+if ($stmt->num_rows > 0) {
     echo json_encode([
         "status" => "error",
         "message" => "Email already registered"
     ]);
     exit;
 }
+$stmt->close();
 
+/* Check phone exists */
+$stmt = $conn->prepare("SELECT user_id FROM users WHERE user_phone = ?");
+$stmt->bind_param("s", $phone);
+$stmt->execute();
+$stmt->store_result();
 
-// check phone number
-$check = mysqli_query($conn, "SELECT user_id FROM users WHERE user_phone='$phone'");
-if (mysqli_num_rows($check) > 0) {
+if ($stmt->num_rows > 0) {
     echo json_encode([
         "status" => "error",
         "message" => "Phone number already registered"
     ]);
     exit;
 }
+$stmt->close();
 
-// Hash password
+/* Hash password */
 $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-// Insert
-$sql = "INSERT INTO users (user_name, user_email, user_password, user_phone)
-        VALUES ('$fullname', '$email', '$hashedPassword', '$phone')";
+/* Insert user */
+$stmt = $conn->prepare(
+    "INSERT INTO users (user_name, user_email, user_password, user_phone)
+     VALUES (?, ?, ?, ?)"
+);
+$stmt->bind_param("ssss", $fullname, $email, $hashedPassword, $phone);
 
-if (mysqli_query($conn, $sql)) {
+if ($stmt->execute()) {
     echo json_encode([
         "status" => "success",
         "message" => "Registration successful"
@@ -84,4 +115,7 @@ if (mysqli_query($conn, $sql)) {
         "message" => "Database error"
     ]);
 }
+
+$stmt->close();
+$conn->close();
 ?>

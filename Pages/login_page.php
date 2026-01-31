@@ -116,13 +116,13 @@
            name="email"
            placeholder="Email"
            ng-model="user.email"
-           required>
+           >
 
     <input type="password"
            name="password"
            placeholder="Password"
            ng-model="user.password"
-           required>
+           >
 
     <p>
       Don't have an account ?
